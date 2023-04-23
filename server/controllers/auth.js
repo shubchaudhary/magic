@@ -23,7 +23,7 @@ const loginUser = async (req, res) => {
         if (!user || user.email !== email) {
             return res.json({ status: "not found", error: "Invalid credentials" });
         }
-        const token = jwt.sign({ email: email }, `${process.env.JWT_SECRET_KEY}`, { expiresIn: "1d" });
+        const token = jwt.sign({ email: email }, `${process.env.SECRET}`, { expiresIn: "1d" });
         return res.json({ message: "user found", status: "200", token: token, id: user._id });
     } catch (err) {
         return res.json({ message: err.message, status: "error" });
