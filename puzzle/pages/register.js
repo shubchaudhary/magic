@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import axios from "axios";
+import base from "../handler/base";
 
 const Register = () => {
     useEffect(() => {
@@ -21,19 +23,22 @@ const Register = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        fetch("http://localhost:8080/api/register", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify({
-                username,
-                email,
-                password,
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
+        axios
+            .post(
+                `${base}/api/register`,
+                {
+                    username,
+                    email,
+                    password,
+                },
+                {
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                }
+            )
+            .then((response) => {
+                const data = response.data;
                 if (data.message === "user created") {
                     toast("Registered Successfully");
                     setSubmitted(true);
@@ -42,7 +47,7 @@ const Register = () => {
                     toast.error("Username/email already exists.");
                 }
             })
-            .catch((err) => {
+            .catch((error) => {
                 toast.error("Something went wrong");
             });
     };

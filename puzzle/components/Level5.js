@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import axios from "axios";
+import { base } from "../handler/base";
 
 const LevelFive = () => {
     const router = useRouter();
@@ -17,27 +19,25 @@ const LevelFive = () => {
             setUserLevel(6);
             setUserScore(10);
             const token = localStorage.getItem("SiteToken");
-            fetch("http://localhost:8080/api/update", {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json",
-                },
-                body: JSON.stringify({
+            axios
+                .post(`${base}/api/update`, {
                     level,
                     score,
                     token,
-                }),
-            })
-                .then((res) => res.json())
-                .then((data) => {
+                })
+                .then((response) => {
+                    const data = response.data;
                     if (data.status === "200") {
                         toast("Updating successful");
                     } else {
                         toast.error("Updating Failed.");
                     }
                 })
-                .catch((err) => {
+                .catch((error) => {
                     toast.error("Something went wrong");
+                })
+                .finally(() => {
+                    router.reload();
                 });
             router.reload();
         } else {

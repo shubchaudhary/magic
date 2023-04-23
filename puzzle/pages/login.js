@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import axios from "axios";
+import { base } from "../handler/base";
 
 const Login = () => {
     useEffect(() => {
@@ -19,18 +21,21 @@ const Login = () => {
     const [submitted, setSubmitted] = React.useState(false);
     const handleLogin = (e) => {
         e.preventDefault();
-        fetch("http://localhost:8080/api/login", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify({
-                email,
-                password,
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
+        axios
+            .post(
+                `${base}/api/login`,
+                {
+                    email,
+                    password,
+                },
+                {
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                }
+            )
+            .then((response) => {
+                const data = response.data;
                 if (data.message === "user found") {
                     toast("Login Successfully");
                     localStorage.setItem("SiteToken", data.token);
@@ -41,7 +46,7 @@ const Login = () => {
                     toast.error("Invalid credentials");
                 }
             })
-            .catch((err) => {
+            .catch((error) => {
                 toast.error("Something went wrong");
             });
     };

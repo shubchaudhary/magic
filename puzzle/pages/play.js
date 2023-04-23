@@ -9,6 +9,8 @@ import LevelThree from "../components/Level3";
 import LevelFour from "../components/Level4";
 import LevelFive from "../components/Level5";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { base } from "../handler/base";
 
 const Play = () => {
     const router = useRouter();
@@ -19,23 +21,29 @@ const Play = () => {
         if (!isAuthenticated) {
             router.push("/login");
         }
-        fetch("http://localhost:8080/api/info", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("SiteToken"),
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.status === "error") return toast.error("Error Occurred");
-                setLevel(data.userData.level);
-                setScore(data.userData.score);
+        axios
+            .post(
+                `${base}/api/info`,
+                {
+                    token: localStorage.getItem("SiteToken"),
+                },
+                {
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                }
+            )
+            .then((response) => {
+                const data = response.data;
+                if (data.status === "error") {
+                    toast.error("Error Occurred");
+                } else {
+                    setLevel(data.userData.level);
+                    setScore(data.userData.score);
+                }
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((error) => {
+                console.log(error);
             });
     }, []);
 
@@ -57,7 +65,7 @@ const Play = () => {
                     >
                         Logout
                     </button>
-                    <p class="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
+                    <p className="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
                     <LevelOne />;
                 </section>
             </>
@@ -74,7 +82,7 @@ const Play = () => {
                     >
                         Logout
                     </button>
-                    <p class="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
+                    <p className="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
                     <LevelTwo />;
                 </section>
             </>
@@ -91,7 +99,7 @@ const Play = () => {
                     >
                         Logout
                     </button>
-                    <p class="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
+                    <p className="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
                     <LevelThree />;
                 </section>
             </>
@@ -108,7 +116,7 @@ const Play = () => {
                     >
                         Logout
                     </button>
-                    <p class="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
+                    <p className="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
                     <LevelFour />;
                 </section>
             </>
@@ -125,7 +133,7 @@ const Play = () => {
                     >
                         Logout
                     </button>
-                    <p class="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
+                    <p className="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
                     <LevelFive />;
                 </section>
             </>
@@ -143,10 +151,10 @@ const Play = () => {
                         Logout
                     </button>
                     <div className="flex flex-col items-center justify-center">
-                        <p class="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
+                        <p className="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
                         <div className="bg-gray-900 flex flex-col items-center mx-80 h-auto bg-opacity-80 border-2 border-black shadow-xl px-10 py-8 rounded-2xl">
                             <img src="/crystal.png" alt="Trophy" className="w-48" />
-                            <p class="text-lg mt-4 text-white">
+                            <p className="text-lg mt-4 text-white">
                                 Only the bravest and most clever adventurers are able to complete the puzzle game and
                                 save the kingdom from Valtor's grasp. And Orin, grateful for your help, and gave you the
                                 crystal to protect.
