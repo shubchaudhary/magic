@@ -1,0 +1,8 @@
+.background {
+    position: relative;
+    background: url(/background.png);
+    width: 100%;
+    height: auto;
+    background-color: darkgray;
+    background-blend-mode: multiply;
+}
