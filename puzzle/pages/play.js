@@ -154,7 +154,7 @@ const Play = () => {
                     <div className="flex flex-col items-center justify-center">
                         <p className="text-3xl text-center my-2 absolute bg-slate-800 bg-opacity-80 rounded-xl text-orange-700 px-5 py-4 top-14 sm:top-0 sm:rounded-b-xl">{`Score: ${score}`}</p>
                         <div className="bg-gray-900 flex flex-col items-center mx-80 h-auto bg-opacity-80 border-2 border-black shadow-xl px-10 py-8 rounded-2xl">
-                            <Image src="/crystal.png" alt="Trophy" width={48} height={48} />
+                            <Image src="/crystal.png" alt="Trophy" width={150} height={150} />
                             <p className="text-lg mt-4 text-white">
                                 Only the bravest and most clever adventurers are able to complete the puzzle game and
                                 save the kingdom from Valtor's grasp. And Orin, grateful for your help, and gave you the

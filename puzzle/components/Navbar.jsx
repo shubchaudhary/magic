@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -18,7 +19,7 @@ const NavBar = () => {
             <nav className="bg-white border-gray-200 dark:bg-black">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
                     <Link href="/" className="flex items-center">
-                        <img src="/logo-white.png" className=" w-16 mr-3" alt="Company Logo" />
+                        <Image src="/logo-white.png" width={60} height={50} className=" w-12 mr-3" alt="Company Logo" />
                         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                             MAGIC LAND
                         </span>
