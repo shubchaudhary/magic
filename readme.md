@@ -11,7 +11,7 @@ Our website is dedicated to a single riddle, but with a twist. This riddle comes
     3. Patience and perseverance
 ## Screenshot
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.jpg)
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file.
