@@ -6,7 +6,6 @@ import NavBar from "../components/Navbar";
 import NProgress from "nprogress";
 import "../node_modules/nprogress/nprogress.css";
 import Head from "next/head";
-import Link from "next/link";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

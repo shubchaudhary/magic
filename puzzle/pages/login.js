@@ -8,14 +8,13 @@ import axios from "axios";
 import { base } from "../handler/base";
 
 const Login = () => {
+    const router = useRouter();
     useEffect(() => {
         const isAuthenticated = localStorage.getItem("SiteToken");
         if (isAuthenticated) {
             router.push("/play");
         }
     }, []);
-
-    const router = useRouter();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [submitted, setSubmitted] = React.useState(false);

@@ -8,6 +8,7 @@ import axios from "axios";
 import base from "../handler/base";
 
 const Register = () => {
+    const router = useRouter();
     useEffect(() => {
         const isAuthenticated = localStorage.getItem("SiteToken");
         if (isAuthenticated) {
@@ -15,7 +16,6 @@ const Register = () => {
         }
     }, []);
 
-    const router = useRouter();
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
